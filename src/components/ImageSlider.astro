@@ -1,0 +1,59 @@
+---
+import product1 from "../../public/images/image-product-1.jpg";
+
+import leftArrow from "../../public/images/icon-previous.svg";
+import rightArrow from "../../public/images/icon-next.svg";
+---
+
+<div>
+  <div class="relative">
+    <img
+      id="imageSlider"
+      class="h-[300px] min-w-[250px] object-cover w-full"
+      src={product1.src}
+      alt=""
+    />
+    <img
+      id="previousBtn"
+      class="cursor-pointer absolute top-1/2 left-0 transform -translate-y-1/2 px-3.5 py-3 rounded-full ml-3 bg-white"
+      src={leftArrow.src}
+      alt=""
+    />
+    <img
+      id="nextBtn"
+      class="cursor-pointer absolute top-1/2 right-0 transform -translate-y-1/2 bg-white px-3.5 py-3 rounded-full mr-3"
+      src={rightArrow.src}
+      alt=""
+    />
+  </div>
+</div>
+
+<script>
+  const previousBtn = document.querySelector("#previousBtn");
+  const nextBtn = document.querySelector("#nextBtn");
+  const imageSlider = document.querySelector("#imageSlider");
+
+  let cont = 1;
+
+  nextBtn.addEventListener("click", () => {
+    cont++;
+    changeImgProduct();
+  });
+
+  previousBtn.addEventListener("click", () => {
+    cont--;
+    changeImgProduct();
+  });
+
+  function changeImgProduct() {
+    const numImages = 4;
+
+    if(cont < 1) {
+        cont = numImages;
+    } else if (cont > numImages) {
+        cont = 1;
+    }
+    const path = `../images/image-product-${cont}.jpg`;
+    imageSlider.src = path;
+}
+</script>
