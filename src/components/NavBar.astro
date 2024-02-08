@@ -1,0 +1,17 @@
+---
+import menuIcon from '../../public/images/icon-menu.svg'
+import logoIcon from '../../public/images/logo.svg'
+import logoCart from '../../public/images/icon-cart.svg'
+import imageAvatar from '../../public/images/image-avatar.png'
+---
+
+<nav class="flex items-center justify-between px-4 pt-4 pb-4">
+    <div class="flex items-center gap-4">
+        <img src={menuIcon.src} alt="Menu icon">
+        <img class="pb-1 w-[125px] max-w-[150px]" src={logoIcon.src} alt="Logo icon sneakers">
+    </div>
+    <div class="flex items-center gap-4">
+        <img src={logoCart.src} alt="logo cart">
+        <img class="h-7 " src={imageAvatar.src} alt="avatar">
+    </div>
+</nav>
