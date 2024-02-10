@@ -5,9 +5,13 @@ export default {
 		extend: {
 			colors: {
 				mainOrange: '#FF7E1B',
+				lightOrange: 'hsl(25, 100%, 94%)',
 				
 			}
 		},
+		screens: {
+			'vm': '520px', 
+		}
 		
 	},
 	
