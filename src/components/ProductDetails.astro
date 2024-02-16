@@ -32,7 +32,8 @@ import plusIcon from "../../public/images/icon-plus.svg";
     <img id="plusBtn" src={plusIcon.src} alt="" />
   </div>
   <div
-    class="bg-mainOrange rounded-xl p-3 flex items-center justify-center gap-4 mt-3"
+    id="addToCartBtn"
+    class="bg-mainOrange rounded-xl p-3 flex items-center justify-center gap-4 mt-3 cursor-pointer"
   >
     <svg
       class="cart w-[25px]"
@@ -51,6 +52,8 @@ import plusIcon from "../../public/images/icon-plus.svg";
   const quantityCounter = document.querySelector("#quantityCounter");
   const minusBtn = document.querySelector("#minusBtn");
   const plusBtn = document.querySelector("#plusBtn");
+  const addToCartBtn = document.querySelector("#addToCartBtn");
+  const counterCart = document.querySelector("#counterCart");
 
   let counter = 0;
 
@@ -65,9 +68,19 @@ import plusIcon from "../../public/images/icon-plus.svg";
     counter++;
     quantityCounter.textContent = counter.toString();
   });
+
+  addToCartBtn.addEventListener("click", () => {
+    if (counter === 0) {
+      return;
+    } else {
+      counterCart.textContent = parseInt(counterCart.textContent) + counter;
+      counterCart.classList.remove("hidden");
+    }
+  });
 </script>
 <style>
   .cart path {
     fill: white;
   }
+  
 </style>
