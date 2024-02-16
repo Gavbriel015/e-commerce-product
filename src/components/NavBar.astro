@@ -16,12 +16,17 @@ import closeIcon from "../../public/images/icon-close.svg";
     />
   </div>
   <div class="flex items-center gap-4">
-    <img src={logoCart.src} alt="logo cart" />
+    <div class="relative">
+      <img class="cursor-pointer" id="cart" src={logoCart.src} alt="logo cart" />
+      <div id="counterCart" class="hidden bg-mainOrange w-5 h-3 absolute -top-1 -right-2 flex justify-center items-center rounded-full text-[9px] text-white font-bold">
+        0
+      </div>
+    </div>
     <img class="h-7" src={imageAvatar.src} alt="avatar" />
   </div>
 </nav>
 <div
-  
+  hidden
   id="mobileNavBar"
   class="bg-black/70 w-full h-full fixed top-0 left-0 z-50"
 >
@@ -42,6 +47,8 @@ import closeIcon from "../../public/images/icon-close.svg";
 <script>
   const closeBtn = document.querySelector("#closeBtn");
   const mobileNavBar = document.querySelector("#mobileNavBar");
+  const cart = document.querySelector("#cart");
+  const cartScreen = document.querySelector("#cartScreen");
 
   const menuIcon = document.querySelector("#menuIcon");
 
@@ -51,6 +58,15 @@ import closeIcon from "../../public/images/icon-close.svg";
 
   menuIcon.addEventListener("click", () => {
     mobileNavBar.hidden = false;
+    
   });
+
+  cart.addEventListener("click", () => {
+    if(cartScreen.classList.contains('hidden')) {
+      cartScreen.classList.remove('hidden');
+    } else {
+      cartScreen.classList.add('hidden');
+    }
+  })
 
 </script>
