@@ -27,18 +27,35 @@ import cartImage from "../../public/images/image-product-1-thumbnail.jpg";
       src={rightArrow.src}
       alt=""
     />
-    <div id="cartScreen" class=" absolute bg-white w-[95%] h-[90%] top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] p-2">
+    <!-- DISPLAY CART WHITE SCREEN -->
+    <div
+      id="cartScreen"
+      class="absolute rounded-xl shadow-lg bg-white w-[95%] h-[95%] top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] p-4"
+    >
       <h1 class="font-bold text-lg pb-4">Cart</h1>
-      <hr class="mb-10">
-      <div class="flex items-center justify-between px-4">
-        <img class="max-w-[55px]" src={cartImage.src} alt="">
-        <div class="px-5">
-          <p class="text-gray-500">Fall Limited Edition Sneakers</p>
-          <p class="text-gray-500">$125.00 x 3 <span class="font-bold text-black">$375</span></p>
+      <hr class="mb-10" />
+      <div id="" class="flex justify-center items-center flex-col">
+        <div class="" id="empty">
+          <p class="pt-10 font-bold text-gray-500">Your cart is empty.</p>
         </div>
-        <img src={iconDelete.src} alt="">
+        
+        <div id="productInCart" class="hidden flex items-center justify-between w-full px-4">
+          <img class="max-w-[55px]" src={cartImage.src} alt="" />
+          <div class="px-5 text-sm">
+            <p class="text-gray-500">Fall Limited Edition Sneakers</p>
+            <p class="text-gray-500">
+              $<span id="price">125</span>.00 x <span id="quantity">3</span> <span id="total" class="font-bold text-black">$375</span>
+            </p>
+          </div>
+          <img id="iconDelete" src={iconDelete.src} alt="" />
+        </div>
+        <button
+          id="checkoutBtn"
+          class="hidden px-4 mt-6 bg-mainOrange text-white font-bold w-full py-3 rounded-xl"
+          >Checkout</button
+        >
       </div>
-      <button class="px-4 mt-6 bg-mainOrange text-white font-bold w-full py-3 rounded-xl">Checkout</button>
+      
     </div>
   </div>
 </div>
@@ -47,6 +64,9 @@ import cartImage from "../../public/images/image-product-1-thumbnail.jpg";
   const previousBtn = document.querySelector("#previousBtn");
   const nextBtn = document.querySelector("#nextBtn");
   const imageSlider = document.querySelector("#imageSlider");
+  const checkoutBtn = document.querySelector('#checkoutBtn')
+  const empty = document.querySelector('#empty');
+
 
   let cont = 1;
 
@@ -63,12 +83,12 @@ import cartImage from "../../public/images/image-product-1-thumbnail.jpg";
   function changeImgProduct() {
     const numImages = 4;
 
-    if(cont < 1) {
-        cont = numImages;
+    if (cont < 1) {
+      cont = numImages;
     } else if (cont > numImages) {
-        cont = 1;
+      cont = 1;
     }
     const path = `../images/image-product-${cont}.jpg`;
     imageSlider.src = path;
-}
+  }
 </script>

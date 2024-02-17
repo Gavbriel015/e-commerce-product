@@ -54,6 +54,14 @@ import plusIcon from "../../public/images/icon-plus.svg";
   const plusBtn = document.querySelector("#plusBtn");
   const addToCartBtn = document.querySelector("#addToCartBtn");
   const counterCart = document.querySelector("#counterCart");
+  const productInCart = document.querySelector("#productInCart");
+  
+  const total = document.querySelector('#total')
+  const quantity = document.querySelector('#quantity');
+  const price = document.querySelector('#price');
+  const checkoutBtn = document.querySelector('#checkoutBtn')
+  const empty = document.querySelector('#empty');
+  const iconDelete = document.querySelector("#iconDelete");
 
   let counter = 0;
 
@@ -69,12 +77,29 @@ import plusIcon from "../../public/images/icon-plus.svg";
     quantityCounter.textContent = counter.toString();
   });
 
+  iconDelete.addEventListener("click", () => {
+    productInCart.classList.add('hidden');
+    checkoutBtn.classList.add('hidden');
+    empty.classList.remove('hidden');
+    counterCart.textContent = "0";
+    counterCart.classList.add("hidden");
+    
+
+
+  });
+
   addToCartBtn.addEventListener("click", () => {
     if (counter === 0) {
       return;
     } else {
       counterCart.textContent = parseInt(counterCart.textContent) + counter;
       counterCart.classList.remove("hidden");
+      empty.classList.add('hidden');
+      productInCart.classList.remove('hidden');
+      quantity.textContent = counterCart.textContent;
+      total.textContent = parseInt(price.textContent) * parseInt(quantity.textContent);
+      checkoutBtn.classList.remove('hidden');
+      
     }
   });
 </script>
