@@ -4,22 +4,74 @@ import logoIcon from "../../public/images/logo.svg";
 import logoCart from "../../public/images/icon-cart.svg";
 import imageAvatar from "../../public/images/image-avatar.png";
 import closeIcon from "../../public/images/icon-close.svg";
+import cartImage from "../../public/images/image-product-1-thumbnail.jpg";
+import iconDelete from "../../public/images/icon-delete.svg";
 ---
 
-<nav class="flex items-center justify-between px-4 pt-4 pb-4">
+<nav class="flex items-center justify-between px-4 md:px-20 pt-4 pb-4">
   <div class="flex items-center gap-4">
-    <img id="menuIcon" src={menuIcon.src} alt="Menu icon" />
+    <img class="md:hidden" id="menuIcon" src={menuIcon.src} alt="Menu icon" />
     <img
       class="pb-1 w-[125px] max-w-[150px]"
       src={logoIcon.src}
       alt="Logo icon sneakers"
     />
   </div>
+  <nav class="hidden md:flex gap-5 font-bold">
+    <a href="">Collections</a>
+    <a href="">Men</a>
+    <a href="">Women</a>
+    <a href="">About</a>
+    <a href="">Contact</a>
+  </nav>
   <div class="flex items-center gap-4">
     <div class="relative">
-      <img class="cursor-pointer" id="cart" src={logoCart.src} alt="logo cart" />
-      <div id="counterCart" class="hidden bg-mainOrange w-5 h-3 absolute -top-1 -right-2 flex justify-center items-center rounded-full text-[9px] text-white font-bold">
-        0
+      <div class="relative flex items-center gap-3">
+        <div class="relative">
+          <img
+          class="cursor-pointer"
+          id="cart"
+          src={logoCart.src}
+          alt="logo cart"
+        />
+          <div
+            id="counterCart"
+            class="hidden bg-mainOrange w-5 h-3 absolute -top-1 -right-2 flex justify-center items-center rounded-full text-[9px] text-white font-bold"
+          >
+            0
+          </div>  
+        </div>
+        
+
+        <div
+        id="cartScreenDesktop"
+        class="absolute z-40 rounded-xl shadow-lg bg-white w-[300px] h-[250px] -bottom-[300px] -left-[200px] p-4"
+      >
+        <h1 class="font-bold text-lg pb-4">Cart</h1>
+        <hr class="mb-10" />
+        <div id="" class="flex justify-center items-center flex-col">
+          <div class="" id="empty">
+            <p class="pt-10 font-bold text-gray-500">Your cart is empty.</p>
+          </div>
+
+          <div
+            id="productInCart"
+            class="hidden flex items-center justify-between w-full px-4"
+          >
+            <img class="max-w-[55px]" src={cartImage.src} alt="" />
+            <div class="px-5 text-sm">
+              <p class="text-gray-500">Fall Limited Edition Sneakers</p>
+              <p class="text-gray-500">
+                $<span id="price">125</span>.00 x <span id="quantity">3</span> $<span
+                  id="total"
+                  class="font-bold text-black">$375</span
+                >
+              </p>
+            </div>
+            <img id="iconDelete" src={iconDelete.src} alt="" />
+          
+          </div>
+        
       </div>
     </div>
     <img class="h-7" src={imageAvatar.src} alt="avatar" />
@@ -49,6 +101,7 @@ import closeIcon from "../../public/images/icon-close.svg";
   const mobileNavBar = document.querySelector("#mobileNavBar");
   const cart = document.querySelector("#cart");
   const cartScreen = document.querySelector("#cartScreen");
+  const cartScreenDesktop = document.querySelector("#cartScreenDesktop");
 
   const menuIcon = document.querySelector("#menuIcon");
 
@@ -58,15 +111,21 @@ import closeIcon from "../../public/images/icon-close.svg";
 
   menuIcon.addEventListener("click", () => {
     mobileNavBar.hidden = false;
-    
   });
 
   cart.addEventListener("click", () => {
-    if(cartScreen.classList.contains('hidden')) {
-      cartScreen.classList.remove('hidden');
+    if (cartScreen.classList.contains("hidden")) {
+      cartScreen.classList.remove("hidden");
+      cartScreenDesktop.classList.remove("hidden");
     } else {
-      cartScreen.classList.add('hidden');
+      cartScreen.classList.add("hidden");
+      cartScreenDesktop.classList.add("hidden");
     }
-  })
+    if (cartScreenDesktop.classList.contains("hidden")) {
+      
+    } else {
+      
+    }
 
+  });
 </script>

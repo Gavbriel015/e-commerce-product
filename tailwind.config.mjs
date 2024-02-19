@@ -10,7 +10,8 @@ export default {
 			}
 		},
 		screens: {
-			'vm': '520px', 
+			'vm': '520px',
+			'md': '768px',
 		}
 		
 	},

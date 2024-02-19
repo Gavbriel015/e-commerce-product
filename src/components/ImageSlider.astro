@@ -6,9 +6,23 @@ import rightArrow from "../../public/images/icon-next.svg";
 import iconDelete from "../../public/images/icon-delete.svg";
 import cartImage from "../../public/images/image-product-1-thumbnail.jpg";
 ---
-
+<style>
+  .selectedImg {
+    opacity: 0.5;
+    border: orange 2px solid;
+  }
+</style>
 <div class="">
-  <div class="relative vm:m-auto">
+  <!-- LIGHTBOX DESKTOP -->
+  <div class="hidden md:flex md:flex-col md:gap-4 md:m-4">
+    <img id="mainPreviewImage" class="rounded-xl w-[445px] min-w-[350px] h-auto" src={product1.src} alt="" />
+    <div id="previewImages" class="flex min-w-[350px] max-w-[445px] justify-between gap-4">
+    
+    </div>
+  </div>
+  <!-- LIGHTBOX DESKTOP -->
+  
+  <div class="md:hidden relative">
     <img
       id="imageSlider"
       class="vm:min-h-[300px] vm:bg-center h-[300px] min-w-[250px] object-cover w-full"
@@ -17,20 +31,20 @@ import cartImage from "../../public/images/image-product-1-thumbnail.jpg";
     />
     <img
       id="previousBtn"
-      class="cursor-pointer absolute top-1/2 left-0 transform -translate-y-1/2 px-3.5 py-3 rounded-full ml-3 bg-white"
+      class="md:hidden cursor-pointer absolute top-1/2 left-0 transform -translate-y-1/2 px-3.5 py-3 rounded-full ml-3 bg-white"
       src={leftArrow.src}
       alt=""
     />
     <img
       id="nextBtn"
-      class="cursor-pointer absolute top-1/2 right-0 transform -translate-y-1/2 bg-white px-3.5 py-3 rounded-full mr-3"
+      class="md:hidden cursor-pointer absolute top-1/2 right-0 transform -translate-y-1/2 bg-white px-3.5 py-3 rounded-full mr-3"
       src={rightArrow.src}
       alt=""
     />
     <!-- DISPLAY CART WHITE SCREEN -->
     <div
       id="cartScreen"
-      class="absolute rounded-xl shadow-lg bg-white w-[95%] h-[95%] top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] p-4"
+      class="hidden absolute rounded-xl shadow-lg bg-white w-[95%] h-[95%] top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] p-4"
     >
       <h1 class="font-bold text-lg pb-4">Cart</h1>
       <hr class="mb-10" />
@@ -38,13 +52,19 @@ import cartImage from "../../public/images/image-product-1-thumbnail.jpg";
         <div class="" id="empty">
           <p class="pt-10 font-bold text-gray-500">Your cart is empty.</p>
         </div>
-        
-        <div id="productInCart" class="hidden flex items-center justify-between w-full px-4">
+
+        <div
+          id="productInCart"
+          class="hidden flex items-center justify-between w-full px-4"
+        >
           <img class="max-w-[55px]" src={cartImage.src} alt="" />
           <div class="px-5 text-sm">
             <p class="text-gray-500">Fall Limited Edition Sneakers</p>
             <p class="text-gray-500">
-              $<span id="price">125</span>.00 x <span id="quantity">3</span> <span id="total" class="font-bold text-black">$375</span>
+              $<span id="price">125</span>.00 x <span id="quantity">3</span> $<span
+                id="total"
+                class="font-bold text-black">$375</span
+              >
             </p>
           </div>
           <img id="iconDelete" src={iconDelete.src} alt="" />
@@ -55,7 +75,6 @@ import cartImage from "../../public/images/image-product-1-thumbnail.jpg";
           >Checkout</button
         >
       </div>
-      
     </div>
   </div>
 </div>
@@ -64,9 +83,10 @@ import cartImage from "../../public/images/image-product-1-thumbnail.jpg";
   const previousBtn = document.querySelector("#previousBtn");
   const nextBtn = document.querySelector("#nextBtn");
   const imageSlider = document.querySelector("#imageSlider");
-  const checkoutBtn = document.querySelector('#checkoutBtn')
-  const empty = document.querySelector('#empty');
-
+  const checkoutBtn = document.querySelector("#checkoutBtn");
+  const empty = document.querySelector("#empty");
+  const mainPreviewImage = document.querySelector('#mainPreviewImage')
+  
 
   let cont = 1;
 
@@ -91,4 +111,34 @@ import cartImage from "../../public/images/image-product-1-thumbnail.jpg";
     const path = `../images/image-product-${cont}.jpg`;
     imageSlider.src = path;
   }
+
+  /// render 4 preview images in desktop view
+  
+  const previewImages = document.querySelector('#previewImages');
+  for (let i = 1; i <= 4; i++) {
+    
+    const img = document.createElement("img");
+    
+    img.classList.add("min-w-[30px]", "min-h-[30px]", "w-[90px]", "h-[90px]", "rounded-xl");
+    img.src = `/images/image-product-${i}-thumbnail.jpg`;
+    img.alt = ``;
+
+    if(i === 1){
+      img.classList.add("selectedImg");  
+    }
+    img.addEventListener("click", () => {
+    
+    const allPreviewImages = previewImages.querySelectorAll("img");
+    allPreviewImages.forEach((image) => {
+      image.classList.remove("selectedImg");
+    });    
+    img.classList.add("selectedImg");
+    mainPreviewImage.src = `/images/image-product-${i}.jpg`;
+  });
+
+    
+
+    previewImages.appendChild(img);
+}
+
 </script>

@@ -1,34 +1,146 @@
 ---
-import ImageSlider from "../components/ImageSlider.astro"
-import NavBar from "../components/NavBar.astro"
+import ImageSlider from "../components/ImageSlider.astro";
+import NavBar from "../components/NavBar.astro";
 
-import ProductDetails from "../components/ProductDetails.astro"
+import ProductDetails from "../components/ProductDetails.astro";
 
-import '@fontsource-variable/kumbh-sans';
+import "@fontsource-variable/kumbh-sans";
+
+import product from "../../public/images/image-product-1.jpg";
+import LBleftArrow from "../../public/images/icon-previous.svg";
+import LBrightArrow from "../../public/images/icon-next.svg";
 ---
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Document</title>
-</head>
-<body>
-	<div>
-		<NavBar />
-		<ImageSlider/>
-		<ProductDetails />
-	</div>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div>
+      <div id="lightbox" class="hidden md:z-50 md:hidden fixed w-full h-full bg-black/70">
+        <div class="flex flex-col justify-center items-center w-full h-full">
+          <div id="lightboxcloseBtn">
+            <svg
+              class="ml-[470px] mb-2"
+              width="14"
+              height="15"
+              xmlns="http://www.w3.org/2000/svg"
+              ><path
+                d="m11.596.782 2.122 2.122L9.12 7.499l4.597 4.597-2.122 2.122L7 9.62l-4.595 4.597-2.122-2.122L4.878 7.5.282 2.904 2.404.782l4.595 4.596L11.596.782Z"
+                fill="white"
+                fill-rule="evenodd"></path></svg
+            >
+          </div>
+          <div class="relative">
+			<img id="lightboxMainImage" class="w-[500px] h-[500px]" src={product.src} alt="" />
+			<img id="LA" class="cursor-pointer absolute top-1/2 -left-5 transform -translate-y-1/2 bg-white px-5 py-4 rounded-full" src={LBleftArrow.src} alt="">
+			<img id="RA" class="cursor-pointer absolute top-1/2 -right-5 transform -translate-y-1/2 bg-white px-5 py-4 rounded-full" src={LBrightArrow.src} alt="">
+
+		  </div>
+
+          <div
+            class="flex justify-evenly max-w-[500px] w-full mt-6"
+            id="previewImagesLightbox"
+          >
+          </div>
+        </div>
+      </div>
+      <NavBar />
+      <hr />
+      <div
+        class="md:flex md:justify-center md:h-full md:max-w-[1000px] md:m-auto md:gap-8 md:pt-10 md:items-center"
+      >
+        <ImageSlider />
+        <ProductDetails />
+      </div>
+    </div>
+  </body>
 </html>
 
-<style is:global>
-	::root {
-		--mainOrange: '#FF7E1B',
-	}
-	body {
-		font-family: 'Kumbh Sans Variable', sans-serif;
-	}
+<script>
+    const lightboxcloseBtn = document.querySelector("#lightboxcloseBtn");
+    const lightbox = document.querySelector("#lightbox");
+    const mainPreviewImage = document.querySelector("#mainPreviewImage");
+    const lightboxMainImage = document.querySelector("#lightboxMainImage");
+    const LA = document.querySelector('#LA');
+    const RA = document.querySelector('#RA');
 
+    lightboxcloseBtn.addEventListener("click", () => {
+		lightbox.classList.remove("md:flex");
+		lightbox.classList.add("md:hidden");
+	  updateSelectedImage(0);
+    });
+
+    mainPreviewImage.addEventListener("click", () => {
+      lightbox.classList.remove("md:hidden");
+	  lightbox.classList.add("md:flex");
+    });
+
+    const previewImagesLightbox = document.querySelector("#previewImagesLightbox");
+    let currentImageIndex = 0;
+    const totalImages = 4;
+
+    for (let i = 1; i <= totalImages; i++) {
+      const img = document.createElement("img");
+      if (i === 1) {
+        img.classList.add('selectedImg');
+      }
+      img.classList.add(
+        "min-w-[30px]",
+        "min-h-[30px]",
+        "w-[80px]",
+        "h-[80px]",
+        "rounded-xl",
+        "cursor-pointer"
+      );
+      img.src = `/images/image-product-${i}.jpg`;
+      img.alt = ``;
+
+      previewImagesLightbox.appendChild(img);
+    }
+
+    const images = previewImagesLightbox.querySelectorAll("img");
+    images.forEach((img, index) => {
+      img.addEventListener("click", () => {
+        updateSelectedImage(index);
+      });
+    });
+
+    LA.addEventListener("click", () => {
+      const newIndex = (currentImageIndex - 1 + totalImages) % totalImages;
+      updateSelectedImage(newIndex);
+	  
+    });
+
+    RA.addEventListener("click", () => {
+      const newIndex = (currentImageIndex + 1) % totalImages;
+      updateSelectedImage(newIndex);
+	  
+    });
+
+    function updateSelectedImage(index) {
+      const currentlySelectedImg = previewImagesLightbox.querySelector(".selectedImg");
+      if (currentlySelectedImg) {
+        currentlySelectedImg.classList.remove("selectedImg");
+      }
+      images[index].classList.add("selectedImg");
+      lightboxMainImage.src = images[index].src;
+      currentImageIndex = index;
+    }
+  </script>
+
+<style is:global>
+  ::root {
+    --mainOrange: "#FF7E1B";
+  }
+  .selectedImg {
+    opacity: 0.5;
+    border: orange 2px solid;
+  }
+  body {
+    font-family: "Kumbh Sans Variable", sans-serif;
+  }
 </style>
