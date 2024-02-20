@@ -6,6 +6,7 @@ import rightArrow from "../../public/images/icon-next.svg";
 import iconDelete from "../../public/images/icon-delete.svg";
 import cartImage from "../../public/images/image-product-1-thumbnail.jpg";
 ---
+
 <style>
   .selectedImg {
     opacity: 0.5;
@@ -15,13 +16,20 @@ import cartImage from "../../public/images/image-product-1-thumbnail.jpg";
 <div class="">
   <!-- LIGHTBOX DESKTOP -->
   <div class="hidden md:flex md:flex-col md:gap-4 md:m-4">
-    <img id="mainPreviewImage" class="rounded-xl w-[445px] min-w-[350px] h-auto" src={product1.src} alt="" />
-    <div id="previewImages" class="flex min-w-[350px] max-w-[445px] justify-between gap-4">
-    
+    <img
+      id="mainPreviewImage"
+      class="cursor-pointer rounded-xl w-[445px] min-w-[350px] h-auto"
+      src={product1.src}
+      alt=""
+    />
+    <div
+      id="previewImages"
+      class="flex min-w-[350px] max-w-[445px] justify-between gap-4"
+    >
     </div>
   </div>
   <!-- LIGHTBOX DESKTOP -->
-  
+
   <div class="md:hidden relative">
     <img
       id="imageSlider"
@@ -85,8 +93,7 @@ import cartImage from "../../public/images/image-product-1-thumbnail.jpg";
   const imageSlider = document.querySelector("#imageSlider");
   const checkoutBtn = document.querySelector("#checkoutBtn");
   const empty = document.querySelector("#empty");
-  const mainPreviewImage = document.querySelector('#mainPreviewImage')
-  
+  const mainPreviewImage = document.querySelector("#mainPreviewImage");
 
   let cont = 1;
 
@@ -113,32 +120,34 @@ import cartImage from "../../public/images/image-product-1-thumbnail.jpg";
   }
 
   /// render 4 preview images in desktop view
-  
-  const previewImages = document.querySelector('#previewImages');
+
+  const previewImages = document.querySelector("#previewImages");
   for (let i = 1; i <= 4; i++) {
-    
     const img = document.createElement("img");
-    
-    img.classList.add("min-w-[30px]", "min-h-[30px]", "w-[90px]", "h-[90px]", "rounded-xl");
+
+    img.classList.add(
+      "min-w-[30px]",
+      "min-h-[30px]",
+      "w-[90px]",
+      "h-[90px]",
+      "rounded-xl",
+      "cursor-pointer"
+    );
     img.src = `/images/image-product-${i}-thumbnail.jpg`;
     img.alt = ``;
 
-    if(i === 1){
-      img.classList.add("selectedImg");  
+    if (i === 1) {
+      img.classList.add("selectedImg");
     }
     img.addEventListener("click", () => {
-    
-    const allPreviewImages = previewImages.querySelectorAll("img");
-    allPreviewImages.forEach((image) => {
-      image.classList.remove("selectedImg");
-    });    
-    img.classList.add("selectedImg");
-    mainPreviewImage.src = `/images/image-product-${i}.jpg`;
-  });
-
-    
+      const allPreviewImages = previewImages.querySelectorAll("img");
+      allPreviewImages.forEach((image) => {
+        image.classList.remove("selectedImg");
+      });
+      img.classList.add("selectedImg");
+      mainPreviewImage.src = `/images/image-product-${i}.jpg`;
+    });
 
     previewImages.appendChild(img);
-}
-
+  }
 </script>
