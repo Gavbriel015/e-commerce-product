@@ -50,39 +50,39 @@ import cartImage from "../../public/images/image-product-1-thumbnail.jpg";
       alt=""
     />
     <!-- DISPLAY CART WHITE SCREEN -->
-    <div
-      id="cartScreen"
-      class="hidden absolute rounded-xl shadow-lg bg-white w-[95%] h-[95%] top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] p-4"
-    >
-      <h1 class="font-bold text-lg pb-4">Cart</h1>
-      <hr class="mb-10" />
-      <div id="" class="flex justify-center items-center flex-col">
-        <div class="" id="empty">
-          <p class="pt-10 font-bold text-gray-500">Your cart is empty.</p>
-        </div>
-
-        <div
-          id="productInCart"
-          class="hidden flex items-center justify-between w-full px-4"
-        >
-          <img class="max-w-[55px]" src={cartImage.src} alt="" />
-          <div class="px-5 text-sm">
-            <p class="text-gray-500">Fall Limited Edition Sneakers</p>
-            <p class="text-gray-500">
-              $<span id="price">125</span>.00 x <span id="quantity">3</span> $<span
-                id="total"
-                class="font-bold text-black">$375</span
-              >
-            </p>
-          </div>
-          <img id="iconDelete" src={iconDelete.src} alt="" />
-        </div>
-        <button
-          id="checkoutBtn"
-          class="hidden px-4 mt-6 bg-mainOrange text-white font-bold w-full py-3 rounded-xl"
-          >Checkout</button
-        >
+  </div>
+  <div
+    id="cartScreen"
+    class="md:right-0 md:w-[320px] md:ml-[250px] lg:ml-[370px] xl:ml-[450px] absolute rounded-xl shadow-xl bg-white w-[95%] top-[25%] h-[250px] left-[50%] translate-x-[-50%] translate-y-[-50%] p-4"
+  >
+    <h1 class="font-bold text-lg pb-4">Cart</h1>
+    <hr class="mb-10" />
+    <div id="" class="flex justify-center items-center flex-col">
+      <div class="" id="empty">
+        <p class="pt-10 font-bold text-gray-500">Your cart is empty.</p>
       </div>
+
+      <div
+        id="productInCart"
+        class="hidden flex items-center justify-between w-full px-4"
+      >
+        <img class="max-w-[55px]" src={cartImage.src} alt="" />
+        <div class="px-5 text-sm">
+          <p class="text-gray-500">Fall Limited Edition Sneakers</p>
+          <p class="text-gray-500">
+            $<span id="price">125</span>.00 x <span id="quantity">3</span> $<span
+              id="total"
+              class="font-bold text-black">$375</span
+            >
+          </p>
+        </div>
+        <img id="iconDelete" src={iconDelete.src} alt="" />
+      </div>
+      <button
+        id="checkoutBtn"
+        class="hidden px-4 mt-6 bg-mainOrange text-white font-bold w-full py-3 rounded-xl"
+        >Checkout</button
+      >
     </div>
   </div>
 </div>
